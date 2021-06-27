@@ -1,0 +1,52 @@
+
+{% extends "layout.html" %}
+{% block content %}
+
+
+<br>
+<h2>Results</h2>
+<br>
+{% if classification == 1 %}
+
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Profile evaluation positive!</strong>  You can Interview the candidate.
+  </div>
+
+{% else %}
+
+<div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Profile evaluation negative!</strong>  You cannot Interview the candidate.
+</div>
+
+{% endif %}
+<br>
+
+
+
+<div class="bd-example" align="middle">
+    {% if classification == 1 %}
+
+    <img src="{{url_for('static', filename='try1.png')}}"
+     align= "left" width="700" />
+     {% else %}
+     <img src="{{url_for('static', filename='try0.png')}}"
+     align= "left" width="700" />
+     {% endif %}
+
+</div>
+
+<script>
+  async function loadHtml() {
+       const response = await fetch("templates/lime.html")
+       const text = await response.text()
+       document.getElementById('limedata').insertAdjacentText('beforeend', text)
+  }
+  
+  loadHtml()
+  </script>
+
+<div id = 'limedata'></div>
+
+{% endblock %}
